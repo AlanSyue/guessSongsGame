@@ -5,7 +5,8 @@ const Question = (props) => {
   return (
     <div>
       <h3>歌名：{name}</h3>
-      <iframe 
+      <iframe
+        title="songsVideo" 
         width="100%" 
         height="auto" 
         src={`${urlPath}&forceUpdateAt=${forceUpdateAt}`}  

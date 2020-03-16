@@ -26,6 +26,7 @@ Object.keys(songs).map((key, index) => {
     'name'           : key,
     'urlPath'        : `https://www.youtube.com/embed/${songId}?start=${startSec}` 
   };
+  return true;
 })
 
 

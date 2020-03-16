@@ -10,9 +10,6 @@ import {
 import Question from './component/Question';
 import sortSongArray from './utils/randomSongs'
 
-const useForceUpdate = () => useState()[1];
-
-
 const App = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [songIndex, setSongIndex] = useState(0);
