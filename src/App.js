@@ -7,40 +7,17 @@ import {
     Col, 
     Button 
 } from 'react-bootstrap';
-import { songs } from './song.js';
+import Question from './component/Question';
+import sortSongArray from './utils/randomSongs'
 
-let sortSongArray = [];
-const songsNum = Object.keys(songs).length;
-for (var sortArr = [], i = 0; i < songsNum; ++i) sortArr[i] = i;
+const useForceUpdate = () => useState()[1];
 
-const shuffle = array => {
-  let tmp, current, top = array.length;
-  if(top) while(--top) {
-    current = Math.floor(Math.random() * (top + 1));
-    tmp = array[current];
-    array[current] = array[top];
-    array[top] = tmp;
-  }
-
-  return array;
-}
-
-sortArr = shuffle(sortArr);
-Object.keys(songs).map((key, index) => {
-  const sortKey = sortArr.shift();
-  const songId = songs[key]['id'];
-  const startSec = songs[key]['startSec'];
-  sortSongArray[sortKey] = {
-    'name'           : key,
-    'urlPath'        : `https://www.youtube.com/embed/${songId}?start=${startSec}` 
-  };
-})
 
 const App = () => {
-  const [gameStatus, setGameStatus] = useState(-1);
-  const changeStatus = statusCode => {
-    setGameStatus(statusCode);
-  }
+  const [isStarted, setIsStarted] = useState(false);
+  const [songIndex, setSongIndex] = useState(0);
+  const [forceUpdateAt, setForceUpdateAt] = useState(Date.now());
+
   return (
     <div>
       <Row className="justify-content-md-center">
@@ -50,36 +27,41 @@ const App = () => {
       </Row>
       <Row className="justify-content-md-center">
         <Col md="auto">
-          { gameStatus == -1 && (
+          { !isStarted && (
             <Button 
               className="center"
               size="lg" 
               variant="primary" 
-              onClick={e => changeStatus(0)}
+              onClick={e => setIsStarted(true)}
             >
               開始遊戲
             </Button>
             )
           }
-          { gameStatus != -1 && [
-              <h3>歌名：{sortSongArray[gameStatus]['name']}</h3>,
-              <iframe 
-                width="100%" 
-                height="auto" 
-                src={sortSongArray[gameStatus]['urlPath']}  
-                frameBorder="0" 
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen>
-              </iframe>,
+          {
+            isStarted && <div>
+              <Question
+                forceUpdateAt={forceUpdateAt}
+                name={sortSongArray[songIndex]['name']}
+                urlPath={sortSongArray[songIndex]['urlPath']}
+              />
               <Button 
                 className="center"
                 size="lg" 
                 variant="primary" 
-                onClick={e => changeStatus(gameStatus + 1)}
+                onClick={e => setSongIndex(songIndex + 1)}
               >
                 下一題
               </Button>
-            ]
+              <Button 
+                className="center"
+                size="lg" 
+                variant="primary" 
+                onClick={e => {setForceUpdateAt(Date.now())}}
+              >
+                重新
+              </Button>
+            </div>
           }
         </Col>
       </Row>
