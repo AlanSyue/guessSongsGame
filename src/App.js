@@ -26,7 +26,7 @@ const App = () => {
         <Col md="auto">
           { !isStarted && (
             <Button 
-              className="center"
+              className="main-center"
               size="lg" 
               variant="primary" 
               onClick={e => setIsStarted(true)}
@@ -36,7 +36,7 @@ const App = () => {
             )
           }
           {
-            isStarted && <div>
+            (isStarted && sortSongArray[songIndex]) && <div>
               <Question
                 forceUpdateAt={forceUpdateAt}
                 name={sortSongArray[songIndex]['name']}
@@ -57,6 +57,19 @@ const App = () => {
                 onClick={e => {setForceUpdateAt(Date.now())}}
               >
                 重新
+              </Button>
+            </div>
+          }
+          {
+            (isStarted && !sortSongArray[songIndex]) && <div>
+              <img width='100%' src='https://media.giphy.com/media/JltOMwYmi0VrO/giphy.gif' />
+              <Button 
+                className="main-center margin-top"
+                size="lg" 
+                variant="primary" 
+                onClick={e => setSongIndex(1)}
+              >
+                再玩一次
               </Button>
             </div>
           }
