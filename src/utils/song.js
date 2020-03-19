@@ -27,6 +27,10 @@ const songs = {
         "id"       : "IfqIlcIp2d4",
         "startSec" : 56
     },
+    "一路向北" : {
+        "id"       : "L229QDxDakU",
+        "startSec" : 70
+    }
 }
 
 export {songs}
