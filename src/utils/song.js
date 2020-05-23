@@ -33,7 +33,7 @@ const songs = {
     },
     "Lemon" : {
         "id"       : "SX_ViT4Ra7k",
-        "startSec" : 16
+        "startSec" : 19
     }
 }
 
