@@ -30,6 +30,10 @@ const songs = {
     "一路向北" : {
         "id"       : "L229QDxDakU",
         "startSec" : 70
+    },
+    "Lemon" : {
+        "id"       : "SX_ViT4Ra7k",
+        "startSec" : 16
     }
 }
 
